@@ -1,0 +1,25 @@
+body * {
+  flex: 1;
+  margin: 0;
+}
+div, form {
+  display: flex;
+}
+component, tristate {
+  display: inherit;
+}
+.flex-right {
+  flex-direction: row
+}
+.flex-down {
+  flex-direction: column
+}
+.flex-left {
+  flex-direction: row-reverse
+}
+.flex-up {
+  flex-direction: column-reverse
+}
+.flex-pad {
+  flex: 100
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "noLib": false,
+    "preserveConstEnums": true,
+    "experimentalDecorators": true
+  },
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
