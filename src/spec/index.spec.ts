@@ -36,33 +36,6 @@ describe('noml', () => {
     expect(result.className).to.equal('myClass1 myClass2 myClass3');
   });
 
-  it('renders component.getBody()', () => {
-    const myComponent = {
-      getBody() {
-        return ui.span('this is a component');
-      }
-    };
-    noml.renderPage(myComponent);
-    expectBody('<component id="_0"><span>this is a component</span></component>');
-  });
-
-  it('renders component.getBody() as Promise', () => {
-    const testPromise = Promise.resolve(ui.span('this is a resolved promise'));
-    const myComponent = {
-      getBody() {
-        return testPromise;
-      },
-      getLoadingBody() {
-        return ui.span('loading');
-      }
-    };
-    noml.renderPage(myComponent);
-    expectBody('<component id="_0"><span>loading</span></component>');
-    return testPromise.then(() => {
-      expectBody('<component id="_0"><span>this is a resolved promise</span></component>');
-    });
-  });
-
   it('wires and invokes the click event', () => {
     let clicked = false;
     const span = ui.span('click here!')
@@ -75,7 +48,6 @@ describe('noml', () => {
   });
 
   class TestComponent extends ui.Component<any, any, any> {
-    _id = 'testId';
     getBody() {
       return ui.span('test span').class('myClass');
     }
@@ -88,10 +60,35 @@ describe('noml', () => {
     }
   }
 
+  class PromiseComponent extends ui.Component<any, any, any> {
+    testPromise = Promise.resolve(ui.span('this is a resolved promise'));
+    getBody() {
+      return this.testPromise;
+    }
+    getLoadingBody() {
+      return ui.span('loading');
+    }
+  }
+
+  it('renders component.getBody()', () => {
+    const myComponent = new TestComponent();
+    noml.renderPage(myComponent);
+    expectBody('<component id="_0"><span class="myClass">test span</span></component>');
+  });
+
+  it('renders component.getBody() as Promise', () => {
+    const promiseComponent = new PromiseComponent();
+    noml.renderPage(promiseComponent);
+    expectBody('<component id="_0"><span>loading</span></component>');
+    return promiseComponent.testPromise.then(() => {
+      expectBody('<component id="_0"><span>this is a resolved promise</span></component>');
+    });
+  });
+
   it('applies styles', () => {
     const testComponent = new TestComponent();
     noml.renderPage(testComponent);
-    const elem = document.querySelector('#testId .myClass');
+    const elem = document.querySelector('.myClass');
     const style = getComputedStyle(elem);
     expect(style.color).to.equal('rgb(255, 0, 0)');
   });
