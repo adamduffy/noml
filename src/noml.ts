@@ -5,7 +5,7 @@ export {Event} from './event.ts';
 interface NoElement extends ui.Element {
   appliedEvents?: any[];
 }
-type Component = ui.Component<any, any, any>;
+type Component = ui.Component<any, any>;
 
 type DomTypes = Element | Element[] | Text;
 type Domish = DomTypes | DomTypes[];

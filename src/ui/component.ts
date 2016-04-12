@@ -1,16 +1,14 @@
 import {mergeStyles, renderComponent} from '../noml';
 import {Element} from './element.ts';
 
-export class Component<D, L, S> extends Element {
+export class Component<L, S> extends Element {
 
   _ref = true;
-  dataSource: () => D;
   logic: L;
   _style: any;
 
-  constructor(dataSource?: () => D, logic?: L, id?: string) {
+  constructor(logic?: L, id?: string) {
     super('component');
-    this.dataSource = dataSource;
     this.logic = logic;
     this.id = id;
     this._style = this.getDefaultStyle();
@@ -21,16 +19,6 @@ export class Component<D, L, S> extends Element {
 
   style(style: S): this {
     mergeStyles(this._style, style);
-    return this;
-  }
-
-  setDataSource(dataSource): this {
-    this.dataSource = dataSource;
-    return this;
-  }
-
-  setLogic(logic: L): this {
-    this.logic = logic;
     return this;
   }
 

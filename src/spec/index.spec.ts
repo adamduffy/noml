@@ -47,7 +47,7 @@ describe('noml', () => {
     expect(clicked).to.equal(true);
   });
 
-  class TestComponent extends ui.Component<any, any, any> {
+  class TestComponent extends ui.Component<any, any> {
     getBody() {
       return ui.span('test span').class('myClass');
     }
@@ -60,7 +60,7 @@ describe('noml', () => {
     }
   }
 
-  class PromiseComponent extends ui.Component<any, any, any> {
+  class PromiseComponent extends ui.Component<any, any> {
     testPromise = Promise.resolve(ui.span('this is a resolved promise'));
     getBody() {
       return this.testPromise;
