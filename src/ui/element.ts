@@ -8,7 +8,6 @@ export class Element {
   props: {} = {};
   events: any[] = [];
   children: any[] = [];
-  _loaded: boolean;
   _ref: boolean;
   dom: any;
 
@@ -19,25 +18,7 @@ export class Element {
     }
   }
 
-  load(): Promise<any> | void {
-    const body = this.getBody();
-    if (body instanceof Promise) {
-      this.xchild(this.getLoadingBody());
-      return body.then(this.xchild);
-    }
-    this.xchild(body);
-    return null;
-  }
-
-  // TODO: remove these two after migration
-  getLoadingBody() {
-  }
-
-  getBody(): Promise<any> | any {
-  }
-
   reload() {
-    this._loaded = false;
     this.render();
   }
 
@@ -83,7 +64,7 @@ export class Element {
     return this;
   }
 
-  toggle(condition: any, trueClass: string, falseClass: string): this {
+  toggle(condition: boolean, trueClass: string, falseClass?: string): this {
     if (!!condition) {
       return this.unclass(falseClass).class(trueClass);
     }
