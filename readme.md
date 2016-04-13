@@ -1,7 +1,9 @@
-NOML
+NOML (no markup language)
 ===
 
-NOML renders javascript objects into html.  This technique allows for dynamic content to be rendered on the fly without ever touching html.
+Let's admit it, HTML and Javascript really suck for making applications.  They have separate purposes (UI and logic) with no real glue to bind them.  Enter jQuery, Backbone, Ember, Angular, React, the list goes on and on.  All of these improve the glue, but still rely on some complicated mapping model between the HTML and Javascript.
+
+With NOML there is no HTML (or JSX, or Xml-ish-ness).  NOML renders javascript objects into html.  This technique allows for dynamic content to be rendered on the fly, modified, and bound with logic, without ever touching HTML.  The entire application is written in literal, readable, unconverted Javascript.  The glue is solved (chemistry pun intended).
 
 ## Simple examples
 
@@ -68,6 +70,17 @@ ui.span('a very classy span)
 ```
 ```html
 <span class='myClass1 myClass2 myClass3'>a very classy span</span>
+```
+
+### events
+
+NOML will wire to DOM events during render.  the Element class wraps a few common events
+```javascript
+ui.span('click here').onClick(() => alert('hi!'));
+```
+or you can use any other event name
+```javascript
+ui.span('mouse enter here').event({mouseenter: () => alert('mouse entered!')})
 ```
 
 ###components
