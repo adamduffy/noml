@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     noml: ['noml'],
     mailbox: 'mailbox/mailbox.ts',
+    todo: 'todo/todo.ts',
   },
   output: {
     path: path.join(__dirname, 'lib'),
