@@ -1,0 +1,8 @@
+.npmignore
+src
+typings
+karma.conf.js
+tsconfig.json
+tsd.json
+tslint.json
+webpack.config.js

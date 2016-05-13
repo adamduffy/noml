@@ -4,8 +4,6 @@ var path = require('path');
 module.exports = {
   entry: {
     noml: ['noml'],
-    mailbox: 'mailbox/mailbox.ts',
-    todo: 'todo/todo.ts',
   },
   output: {
     path: path.join(__dirname, 'lib'),
@@ -13,10 +11,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.ts'],
-    root: [
-      path.join(__dirname, 'src'),
-      path.join(__dirname, 'examples')
-    ]
+    root: path.join(__dirname, 'src')
   },
   module: {
     loaders: [

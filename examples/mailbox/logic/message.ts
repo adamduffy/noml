@@ -1,1 +1,0 @@
-export {getSelectedMessage} from './main';
