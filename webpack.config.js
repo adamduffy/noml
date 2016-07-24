@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
   entry: {
-    noml: ['noml'],
+    index: ['index'],
   },
   output: {
     path: path.join(__dirname, 'lib'),

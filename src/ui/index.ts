@@ -1,14 +1,14 @@
-export {styles} from './styles.ts';
-export {Input} from './input.ts';
-export {InputField} from './inputField.ts';
-export {Component} from './component.ts';
-export {Element} from './element.ts';
-export {Tristate} from './tristate.ts';
-export {Option} from './option.ts';
-export {Listbox} from './listbox.ts';
-export {Select} from './select.ts';
-export {Toast} from './toast.ts';
-export * from './common.ts';
+export {styles} from './styles';
+export {Input} from './input';
+export {InputField} from './inputField';
+export {Component} from './component';
+export {Element} from './element';
+export {Tristate} from './tristate';
+export {Option} from './option';
+export {Listbox} from './listbox';
+export {Select} from './select';
+export {Toast} from './toast';
+export * from './common';
 
 export function delayedPromise(resolveFunc, fail?, ms?) {
   return new Promise((resolve, reject) => {

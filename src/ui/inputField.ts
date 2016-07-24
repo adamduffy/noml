@@ -1,5 +1,5 @@
-import {Element} from './element.ts';
-import {Toast} from './toast.ts';
+import {Element} from './element';
+import {Toast} from './toast';
 
 export class InputField extends Element {
 

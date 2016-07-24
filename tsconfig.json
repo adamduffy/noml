@@ -1,15 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "commonjs",
-    "moduleResolution": "node",
+    "outDir": "./lib",
     "sourceMap": true,
-    "declaration": false,
     "noImplicitAny": false,
     "noLib": false,
     "preserveConstEnums": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "declaration": true
   },
+  "files": [
+    "./typings/index.d.ts",
+    "src/index.ts"
+  ],
+  "filesGlob": [
+    "!./node_modules/**"
+  ],
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false

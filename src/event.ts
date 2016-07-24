@@ -1,12 +1,12 @@
 import {autobind} from 'core-decorators';
 
-type handler = (T) => any;
+export type Handler = (T) => any;
 
 export class Event<T> {
 
-  handlers: Array<handler> = [];
+  handlers: Array<Handler> = [];
 
-  hook(f: handler) {
+  hook(f: Handler) {
     this.handlers.push(f);
   }
 

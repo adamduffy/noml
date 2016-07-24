@@ -1,4 +1,4 @@
-import {renderElement, syncProps} from '../noml.ts';
+import {renderElement, syncProps} from '../';
 
 export class Element {
 
@@ -22,8 +22,8 @@ export class Element {
     this.render();
   }
 
-  ref(ref: boolean = true): this {
-    this._ref = ref;
+  ref(enabled: boolean = true): this {
+    this._ref = enabled;
     return this;
   }
 

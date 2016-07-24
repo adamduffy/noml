@@ -1,5 +1,5 @@
-import {mergeStyles, renderComponent} from '../noml';
-import {Element} from './element.ts';
+import {mergeStyles, renderComponent} from '../';
+import {Element} from './element';
 
 export class Component<L, S> extends Element {
 

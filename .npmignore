@@ -1,6 +1,7 @@
 .npmignore
 src
 typings
+typings.json
 karma.conf.js
 tsconfig.json
 tsd.json

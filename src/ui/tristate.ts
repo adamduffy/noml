@@ -1,5 +1,5 @@
-import {Element} from './element.ts';
-import {Event} from '../event.ts';
+import {Element} from './element';
+import {Event} from '../event';
 
 export class Tristate<T> extends Element {
 

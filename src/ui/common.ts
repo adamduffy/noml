@@ -1,6 +1,6 @@
-import {Element} from './element.ts';
-import {Input} from './input.ts';
-import {Form} from './form.ts';
+import {Element} from './element';
+import {Input} from './input';
+import {Form} from './form';
 
 export function span(...c) { return new Element('span', c); }
 export function div(...c) { return new Element('div', c); }

@@ -1,5 +1,5 @@
-import {Element} from './element.ts';
-import {Option} from './option.ts';
+import {Element} from './element';
+import {Option} from './option';
 
 export class Select extends Element {
 
