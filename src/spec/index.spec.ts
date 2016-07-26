@@ -46,6 +46,21 @@ describe('noml', () => {
     expect(clicked).to.equal(true);
   });
 
+  it('syncs new class names with classIf and toggle', () => {
+    const span = ui.span('a re-classed span')
+    	.class('myClass1 myClass2')
+    	.classIf(true, 'conditionalClass')
+      .toggle(true, 'trueClass', 'falseClass')
+      .ref();
+    const result = render(span) as HTMLElement;
+    expect(result.className).to.equal('myClass1 myClass2 conditionalClass trueClass');
+    span.unclass('myClass2')
+    	.classIf(false, 'conditionalClass')
+      .toggle(false, 'trueClass', 'falseClass')
+    	.syncProps();
+    expect(result.className).to.equal('myClass1 falseClass');
+  });
+
   class TestComponent extends ui.Component<any, any> {
     getBody() {
       return ui.span('test span').class('myClass');
