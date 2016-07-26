@@ -5,6 +5,8 @@ Let's admit it, HTML and Javascript really suck for making applications.  They h
 
 With NOML there is no HTML (or JSX, or Xml-ish-ness).  NOML renders javascript objects into html.  This technique allows for dynamic content to be rendered on the fly, modified, and bound with logic, without ever touching HTML.  The entire application is written in literal, readable, unconverted Javascript.  The glue is solved (chemistry pun intended).
 
+see working examples at https://github.com/adamduffy/noml-examples
+
 ## Simple examples
 
 results when noml.render() is called on the object.
@@ -62,14 +64,42 @@ ui.span('a classy span').class('myClass')
 
 the NOML Element class handles de-duping of class names.
 
-```javscript
-ui.span('a very classy span)
+```javascript
+ui.span('a very classy span')
 	.class('myClass1 myClass3')
 	.class('myClass1 myClass2')
 	.class('myClass3');
 ```
 ```html
 <span class='myClass1 myClass2 myClass3'>a very classy span</span>
+```
+
+Class names can be added, removed, or conditional, even after the initial render.
+All props can be re-synced with the dom using `.ref()` at creation, and `.syncProps()` to update.
+
+* `class` adds a class
+* `unclass` removes a class
+* `classIf` adds the class if condition is true, removes if false.
+* `toggle` swaps the class based on condition.
+* all classname methods perform de-duping.
+
+```javascript
+const span = ui.span('a re-classed span')
+	.class('myClass1 myClass2')
+	.classIf(true, 'conditionalClass')
+	.toggle(true, 'trueClass', 'falseClass')
+	.ref(); // .ref() tells noml to keep a reference.
+// render the span
+render(span);
+// at this point, className='myClass1 myClass2 conditionalClass trueClass'
+span.unclass('myClass2')
+	.classIf(false, 'conditionalClass')
+	.toggle(false, 'trueClass', 'falseClass')
+	.syncProps(); // this will re-sync with the dom.
+// now, className='myClass1 falseClass'
+```
+```html
+<span id="_0" class='myClass1'>a re-classed span</span>
 ```
 
 ### events
@@ -99,10 +129,10 @@ to make loading, ready, and failure states, simply return a promise from getBody
 ```javascript
 ...
 	getBody() {
-		return Promise.resolve({span: 'this is a resolved promise'});
+		return Promise.resolve(span('this is a resolved promise'));
 	},
 	getLoadingBody() {
-		return {span: 'loading'};
+		return span('loading');
 	}
 ...
 ```
@@ -119,7 +149,7 @@ TODO: make example
 
 ##Styles
 
-Noml also uses javascript to define CSS.  The general format is as follows:
+Noml also uses javascript to define CSS (optional).  The general format is as follows:
 ```javascript
 {
 	id: {
@@ -176,13 +206,12 @@ start with a simple html file:
 
 and a simple js file:
 ```javascript
-import * as noml from './Noml';
-import {ui} from './Noml';
+import {renderPage, ui} from 'noml';
 
 window.onload = bodyOnLoad();
 
 function bodyOnLoad() {
-	noml.renderPage(ui.span("my first Noml app"));
+	renderPage(ui.span("my first noml app"));
 }
 ```
 
