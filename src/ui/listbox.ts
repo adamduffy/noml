@@ -1,16 +1,23 @@
 import {Element} from './element';
-import {Option} from './option';
+import {Option, Item} from './option';
 
 export class Listbox extends Element {
 
-  constructor(selectedId: string, ids: string[], displayName?: (id: string) => string) {
+  constructor(items?: Item[]) {
     super('select');
-    this.child(
-      Array.from(ids, id => {
-        let selected = (selectedId === id);
-        return new Option(displayName ? displayName(id) : id, id, selected);
-      })
-    );
+    if (items) {
+      this.child(
+        Array.from(items, item => new Option(item))
+      );
+    }
+  }
+
+  onChange(callback: (e) => void): this {
+    return this.event({change: callback});
+  }
+
+  onValueChanged(callback: (v) => any): this {
+    return this.onChange(e => callback(e.target.value));
   }
 
   size(size: number): this {

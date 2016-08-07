@@ -2,14 +2,14 @@ import {Element} from './element';
 
 export class Input extends Element {
 
-  constructor(type: string, value?: string, valueChanged?: (v) => void) {
+  constructor(type: string, value?: string, valueChanged?: (v) => any) {
     super("input");
     this.prop({type});
     if (value !== undefined) {
       this.prop({value});
     }
     if (valueChanged) {
-      this.onChange(ev => valueChanged(ev.target.value));
+      this.onValueChanged(valueChanged);
     }
   }
 
@@ -17,15 +17,23 @@ export class Input extends Element {
     return this.prop({autocomplete: (on ? "on" : "off")});
   }
 
-  getValue() {
+  onChange(callback: (e) => void): this {
+    return this.event({change: callback});
+  }
+
+  onValueChanged(callback: (v) => any): this {
+    return this.onChange(e => callback(e.target.value));
+  }
+
+  getValue(): string {
     return this.dom.value;
   }
 
-  setValue(value: string) {
+  setValue(value: string): void {
     this.dom.value = value;
   }
 
-  focus() {
+  focus(): void {
     this.dom.focus();
   }
 

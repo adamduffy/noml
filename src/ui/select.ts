@@ -1,24 +1,26 @@
 import {Element} from './element';
-import {Option} from './option';
+import {Option, Item} from './option';
 
 export class Select extends Element {
 
-  constructor(selectedId: string, ids: string[], displayName?: (id: string) => string) {
+  constructor(items?: Item[]) {
     super('select');
-    let hasSelection = false;
-    this.child(
-      Array.from(ids, id => {
-        let selected = false;
-        if (selectedId === id) {
-          hasSelection = true;
-          selected = true;
-        }
-        return new Option(displayName ? displayName(id) : id, id, selected);
-      })
-    );
-    if (!hasSelection) {
-      this.children.splice(0, 0, new Option('', '', true).disable());
+    if (items) {
+      this.child(
+        Array.from(items, item => new Option(item))
+      );
+      if (!items.some(i => i.selected)) {
+        this.children.splice(0, 0, new Option({}).disable());
+      }
     }
+  }
+
+  onChange(callback: (e) => any): this {
+    return this.event({change: callback});
+  }
+
+  onValueChanged(callback: (v: string) => any): this {
+    return this.onChange(e => callback(e.target.value));
   }
 
 };

@@ -80,10 +80,6 @@ export class Element {
     return this.event({click: callback});
   }
 
-  onChange(callback: (e) => void) {
-    return this.event({change: callback});
-  }
-
   prop(...props): this {
     Array.from(props, p => Object.assign(this.props, p));
     return this;
